@@ -1,6 +1,6 @@
 from django.db import models
 from fobi.models import FormEntry
-from django.utils import assemble_form_class
+from fobi.utils import assemble_form_class
 
 
 class FormTemplateMixin(models.Model):
@@ -10,7 +10,7 @@ class FormTemplateMixin(models.Model):
     def get_form_class(self):
         """
         Builds an actual Form.
-        
+
         Returns:
             (django.forms.Form)
         """
