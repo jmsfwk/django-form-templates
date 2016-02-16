@@ -26,6 +26,17 @@ class TemplateRenderMixin(object):
     """
     A mixin that can be used to render an additional template.
     """
+    def get_template(self):
+        if not self.template_string:
+            raise ImproperlyConfigured(
+                "No additional template set. Provide a template.")
+        return self.template_string
+
+    def get_template_object(self):
+        """
+        Returns the supplied template.
+        """
+        return Engine().from_string(self.get_template())
 
     def get_template_context(self, **kwargs):
         return Context(self.get_template_context_data(**kwargs))
@@ -83,20 +94,8 @@ class FormTemplateView(FormTemplateMixin, FormView):
     """
     template_string = None
 
-    def get_template(self):
-        if not self.template_string:
-            raise ImproperlyConfigured(
-                "No additional template set. Provide a template.")
-        return self.template_string
 
-    def get_template_object(self):
-        """
-        Returns the supplied template.
-        """
-        return Engine().from_string(self.get_template())
-
-
-class ModelFormTemplateMixin(object):
+class ModelFormTemplateMixin(FormTemplateMixin):
     model_template_name = None
 
     def get_template(self):
