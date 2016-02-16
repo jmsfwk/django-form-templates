@@ -1,5 +1,6 @@
 from django.db import models
 from fobi.models import FormEntry
+from django.utils import assemble_form_class
 
 
 class FormTemplateMixin(models.Model):
@@ -18,8 +19,7 @@ class FormTemplateMixin(models.Model):
         # dynamically.
         FormClass = assemble_form_class(
             self.form,
-            form_element_entries=form_element_entries,
-            request=self.request
+            form_element_entries=form_element_entries
         )
         return FormClass
 

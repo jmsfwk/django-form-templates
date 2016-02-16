@@ -4,7 +4,7 @@ setup(
     name='django-form-templates',
     packages=find_packages(),
     install_requires=[],
-    version='0.1.0',
+    version='0.1.1',
     author='James Fenwick',
     author_email='jfenwick@tecaz.com',
     license='GPLv2',
